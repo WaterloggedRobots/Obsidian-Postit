@@ -1,0 +1,255 @@
+/* ---- color swatches in menus & settings ------------------------------------- */
+
+.ccstyle-swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+  border: 1px solid var(--background-modifier-border);
+  vertical-align: middle;
+}
+
+.ccstyle-invalid-hex {
+  border-color: var(--text-error) !important;
+}
+
+/* ---- custom color modal ------------------------------------------------------ */
+
+.ccstyle-color-modal .ccstyle-modal-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0;
+}
+
+.ccstyle-color-modal input[type="color"] {
+  width: 42px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 4px;
+  background: none;
+}
+
+.ccstyle-color-modal .ccstyle-hex-text {
+  width: 8em;
+  font-family: var(--font-monospace);
+}
+
+.ccstyle-color-modal .ccstyle-modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* ---- line style: dashed / dotted ---------------------------------------------
+   These target the edge's rendered <path>, tagged by edgeStyle.ts with
+   data-cc-line-style / data-cc-path-style. If a future Obsidian version changes
+   the DOM structure enough that the tagging in edgeStyle.ts stops finding the
+   element, these rules simply never match — lines fall back to normal solid
+   Obsidian lines rather than breaking anything.                                */
+
+.canvas-edges path[data-cc-line-style="dashed"],
+.canvas-path[data-cc-line-style="dashed"] {
+  stroke-dasharray: 10 6;
+}
+
+.canvas-edges path[data-cc-line-style="dotted"],
+.canvas-path[data-cc-line-style="dotted"] {
+  stroke-dasharray: 1.5 6;
+  stroke-linecap: round;
+}
+
+/* ---- quick-select side panel --------------------------------------------------- */
+
+.ccstyle-quickselect {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.ccstyle-qs-header {
+  padding: 10px 12px 6px 12px;
+  font-size: 0.75em;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+.ccstyle-qs-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.ccstyle-qs-empty {
+  padding: 14px 12px;
+  color: var(--text-faint);
+  font-size: 0.9em;
+}
+
+.ccstyle-qs-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.ccstyle-qs-row:hover {
+  background: var(--background-modifier-hover);
+}
+
+.ccstyle-qs-swatch {
+  flex: 0 0 auto;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid var(--background-modifier-border);
+}
+
+.ccstyle-qs-label {
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.9em;
+}
+
+/* ---- RGB / HSV color wheel modal ---------------------------------------------- */
+
+.ccstyle-wheel-layout {
+  display: flex;
+  gap: 12px;
+  margin: 12px 0;
+}
+.ccstyle-sv-wrap, .ccstyle-hue-wrap { position: relative; line-height: 0; }
+.ccstyle-sv-canvas, .ccstyle-hue-canvas {
+  cursor: crosshair;
+  border-radius: 4px;
+  border: 1px solid var(--background-modifier-border);
+  touch-action: none;
+}
+.ccstyle-sv-cursor {
+  position: absolute;
+  width: 12px; height: 12px;
+  margin: -6px 0 0 -6px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.6);
+  pointer-events: none;
+}
+.ccstyle-hue-cursor {
+  position: absolute;
+  left: -2px; right: -2px; height: 4px;
+  margin-top: -2px;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.6);
+  pointer-events: none;
+}
+.ccstyle-wheel-preview {
+  height: 34px;
+  border-radius: 4px;
+  border: 1px solid var(--background-modifier-border);
+  margin-bottom: 10px;
+}
+.ccstyle-field-row {
+  display: flex; align-items: center; gap: 8px; margin: 6px 0;
+}
+.ccstyle-field-row > span { width: 3.2em; color: var(--text-muted); }
+.ccstyle-rgb-num { width: 4.5em; }
+.ccstyle-modal-buttons {
+  display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px;
+}
+.ccstyle-hex-text { width: 8em; font-family: var(--font-monospace); }
+
+/* ---- draggable line handles (polyline points / bezier control points) --------- */
+
+.ccstyle-edge-handle {
+  fill: var(--background-primary);
+  stroke: var(--interactive-accent);
+  stroke-width: 2;
+  cursor: grab;
+  pointer-events: all;
+  vector-effect: non-scaling-stroke;
+}
+.ccstyle-edge-handle:active { cursor: grabbing; }
+.ccstyle-edge-handle-c1, .ccstyle-edge-handle-c2 {
+  fill: var(--interactive-accent);
+}
+
+
+/* Canvas tint fix
+   Obsidian builds canvas border/fill colors with color-mix(in oklch, <color> N%, transparent).
+   In this Obsidian/Chromium build, that pulls every hue ~30% toward red (green -> yellow-green,
+   cyan -> blue, etc.). Mixing in srgb produces the same "color at N% opacity" with no hue shift.
+   Selectors and percentages below are copied from Obsidian's own rules. */
+
+.canvas-node.is-themed .canvas-node-container {
+  border-color: color-mix(in srgb, var(--canvas-color) 70%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--canvas-color) 70%, transparent), var(--shadow-stationary);
+}
+
+.canvas-node-group .canvas-node-content,
+.canvas-node.is-themed .canvas-node-content {
+  background-color: color-mix(in srgb, var(--canvas-color) 7%, transparent);
+}
+
+.canvas-group-label,
+.canvas-node-placeholder {
+  background-color: color-mix(in srgb, var(--canvas-color) 10%, transparent);
+}
+
+.canvas-edges g.is-focused path.canvas-interaction-path,
+.canvas:not(.is-connecting) .canvas-edges g:hover path.canvas-interaction-path {
+  stroke: color-mix(in srgb, var(--canvas-color) 10%, transparent);
+}
+
+/* bezier: thin guide from each end of the line to its handle */
+.ccstyle-edge-guide {
+  stroke: var(--interactive-accent);
+  stroke-width: 1;
+  stroke-dasharray: 4 3;
+  opacity: 0.6;
+  pointer-events: none;
+  vector-effect: non-scaling-stroke;
+}
+
+
+/* ---- mobile / touch ----------------------------------------------------------- */
+
+/* don't let the browser pan/zoom while a line handle is being dragged */
+.ccstyle-edge-handle { touch-action: none; }
+
+/* picker sheet that replaces nested submenus on mobile */
+.ccstyle-choice-list { display: flex; flex-direction: column; }
+.ccstyle-choice-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.ccstyle-choice-row:active { background: var(--background-modifier-hover); }
+.ccstyle-choice-row .ccstyle-swatch { width: 20px; height: 20px; margin-right: 0; }
+.ccstyle-choice-icon { width: 20px; display: flex; justify-content: center; color: var(--text-muted); }
+.ccstyle-choice-label { flex: 1 1 auto; }
+.ccstyle-choice-check { color: var(--interactive-accent); display: flex; }
+.ccstyle-choice-sep { height: 1px; margin: 6px 0; background: var(--background-modifier-border); }
+
+/* bigger rows/swatches in the quick-select panel, no sticky hover on touch */
+.is-mobile .ccstyle-qs-row { padding: 12px 14px; min-height: 44px; }
+.is-mobile .ccstyle-qs-swatch { width: 14px; height: 14px; }
+.is-mobile .ccstyle-qs-label { font-size: 1em; }
+@media (hover: none) {
+  .ccstyle-qs-row:hover { background: none; }
+  .ccstyle-qs-row:active { background: var(--background-modifier-hover); }
+}
+
+/* color picker: let the RGB fields wrap on narrow screens */
+.is-mobile .ccstyle-field-row { flex-wrap: wrap; }
+.is-mobile .ccstyle-wheel-layout { justify-content: center; }

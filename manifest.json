@@ -1,0 +1,10 @@
+{
+  "id": "canvas-color-style",
+  "name": "Canvas Color & Style",
+  "version": "0.3.0",
+  "minAppVersion": "1.5.0",
+  "description": "Extra colors for canvas cards and lines, dashed/dotted/straight line styles, and a quick-select side panel for jumping to any card.",
+  "author": "you",
+  "authorUrl": "",
+  "isDesktopOnly": false
+}

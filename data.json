@@ -1,0 +1,62 @@
+{
+  "customColors": [
+    {
+      "name": "Coral",
+      "hex": "#ff7a5c"
+    },
+    {
+      "name": "Amber",
+      "hex": "#e8b84b"
+    },
+    {
+      "name": "Mint",
+      "hex": "#4fd6a0"
+    },
+    {
+      "name": "Teal",
+      "hex": "#2fb6a8"
+    },
+    {
+      "name": "Sky",
+      "hex": "#5fa8e0"
+    },
+    {
+      "name": "Indigo",
+      "hex": "#6c7de0"
+    },
+    {
+      "name": "Violet",
+      "hex": "#a06ce0"
+    },
+    {
+      "name": "Magenta",
+      "hex": "#d6579e"
+    },
+    {
+      "name": "Rose",
+      "hex": "#f28fa8"
+    },
+    {
+      "name": "Sand",
+      "hex": "#d8b978"
+    },
+    {
+      "name": "Olive",
+      "hex": "#9aab5c"
+    },
+    {
+      "name": "Slate",
+      "hex": "#8892a0"
+    },
+    {
+      "name": "Charcoal",
+      "hex": "#5b6270"
+    },
+    {
+      "name": "Ink",
+      "hex": "#3a3f4b"
+    }
+  ],
+  "enableEdgeStylePatch": true,
+  "enableNodeColorPatch": true
+}
