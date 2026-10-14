@@ -58,5 +58,6 @@
     }
   ],
   "enableEdgeStylePatch": true,
-  "enableNodeColorPatch": true
+  "enableNodeColorPatch": true,
+  "defaultCardColor": "#fff3b0"
 }

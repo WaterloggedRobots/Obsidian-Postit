@@ -5,8 +5,14 @@ An Obsidian plugin that extends the built-in **Canvas** feature with:
 - **More colors, everywhere** — a "More colors" submenu (editable in Settings) on
   both cards and connecting lines, on top of Obsidian's own 6 presets, plus a
   "Custom color…" picker for any hex value.
-- **Line style** — solid / dashed / dotted, and a straight-line option alongside
-  Canvas's default curve.
+- **Line style** — solid / dashed / dotted.
+- **Line shape** — straight (the default for every line that hasn't been given a
+  shape), curved (Canvas's own curve), polyline with turning points, or bezier.
+  Arrowheads turn to follow whichever shape the line has. While the bezier or
+  turning-point handles are showing, Canvas's floating menu is nudged out of the
+  way so it never sits on top of them.
+- **Default card color** — new cards start with a light color (set or turn off in
+  Settings).
 - **Quick-select panel** — a side pane (ribbon icon or command palette: "Open canvas
   quick-select panel") listing every card on the open canvas by its first line of
   text, colored by its card color. Click a row to select that card and jump the
@@ -76,6 +82,8 @@ The plugin runs on Obsidian mobile. Touch-specific behavior:
 ## Settings
 
 - **Enable dashed / dotted / straight lines** — toggles the internals patch above.
+- **Default color for new cards** — the color new text, note and link cards start
+  with (light yellow out of the box). Toggle it off to keep Canvas's plain cards.
 - **Custom colors** — add, rename, recolor, or remove entries in the palette shown
   in the "More colors" submenu. Stored per-vault via Obsidian's plugin data, not in
   the `.canvas` files themselves.
